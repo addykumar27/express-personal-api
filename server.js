@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -46,17 +46,45 @@ app.get('/api', function apiIndex(req, res) {
   // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
   // It would be seriously overkill to save any of this to your database.
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
+    woopsIForgotToDocumentAllMyEndpoints: false, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
-    documentationUrl: "https://github.com/example-username/express-personal-api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    documentationUrl: "https://github.com/addykumar27/express-personal-api", // CHANGE ME
+    baseUrl: "https://dashboard.heroku.com/account", // CHANGE ME
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "POST", path: "/api/favoritemovies", description: "E.g. Create a new favorite movies"} // CHANGE ME
     ]
   })
 });
+
+app.get ('/api', function apiIndex(req,res) {
+
+
+
+
+
+app.get('/api/profile', function apiIndex(req, res) {
+res.json({
+
+name: 'Adarshna Kumar',
+githubUsername: 'addykumar27',
+githubLink: 'https://github.com/addykumar27',
+currentCity: 'Hayward',
+  })
+});
+
+app.post('/api/favoritemovies', function apiIndex(req, res) {
+  console.log('movies create', req.body);
+  var newMovies = new db.Movies(req.body);
+  newMovie.save(function handleDBMovieSaved(err, savedMovie) {
+    res.json(savedMovie);
+  });
+});
+
+
+
+
 
 /**********
  * SERVER *
