@@ -53,20 +53,13 @@ app.get('/api', function apiIndex(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/favoritemovies", description: "E.g. Create a new favorite movies"} // CHANGE ME
+      {method: "POST", path: "/api/favoritemovie", description: "E.g. Create a new favorite movies"} // CHANGE ME
     ]
   })
 });
 
-app.get ('/api', function apiIndex(req,res) {
-
-
-
-
-
 app.get('/api/profile', function apiIndex(req, res) {
 res.json({
-
 name: 'Adarshna Kumar',
 githubUsername: 'addykumar27',
 githubLink: 'https://github.com/addykumar27',
@@ -74,14 +67,13 @@ currentCity: 'Hayward',
   })
 });
 
-app.post('/api/favoritemovies', function apiIndex(req, res) {
+app.post('/api/favoritemovie', function apiIndex(req, res) {
   console.log('movies create', req.body);
-  var newMovies = new db.Movies(req.body);
+  var newMovie = new db.Movie(req.body);
   newMovie.save(function handleDBMovieSaved(err, savedMovie) {
     res.json(savedMovie);
-  });
+  })
 });
-
 
 
 
