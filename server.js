@@ -53,7 +53,7 @@ app.get('/api', function apiIndex(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/favoritemovie", description: "E.g. Create a new favorite movies"} // CHANGE ME
+      {method: "POST", path: "/api/favoritemovies", description: "E.g. Create a new favorite movies"} // CHANGE ME
     ]
   })
 });
@@ -67,15 +67,33 @@ currentCity: 'Hayward',
   })
 });
 
-app.post('/api/favoritemovie', function apiIndex(req, res) {
+app.post('/api/favoritemovies', function apiIndex(req, res) {
   console.log('movies create', req.body);
-  var newMovie = new db.Movie(req.body);
-  newMovie.save(function handleDBMovieSaved(err, savedMovie) {
-    res.json(savedMovie);
+  var newMovies = new db.Movies(req.body);
+  newMovie.save(function handleDBMovieSaved(err, savedMovies) {
+    res.json(savedMovies);
   })
 });
 
 
+/*db.Movies.find({name: req.body.name}, 
+    .populate('Movies')
+    .exec(function(err, foundfavoritemovies){
+      if (err) { return console.log("index error: " + err); }
+      res.json(favoritemovies);
+    });
+});*/
+   
+
+app.delete('/api/favoritemovies/:id', function (req, res) {
+  // get book id from url params (`req.params`)
+  console.log('Movie delete', req.params);
+  var MoviesId = req.params.id;
+  // find the index of the book we want to remove
+  db.Movie.findOneAndRemove({ _id: MoviesId }, function (err, deletedMovies) {
+    res.json(deletedMovies);
+  });
+});
 
 
 /**********

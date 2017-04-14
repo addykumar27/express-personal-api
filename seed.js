@@ -28,10 +28,10 @@ var new_Movies =  [
   
 
  db.Movies.create(new_Movie, function(err, favoritemovies){
+  for (var i = 0; i < new_Movies.length - 1; i++);
   if (err){
    return console.log("Error:", err);
- }
-
+ } else {
    console.log("Created new favoritemovies", Movies._id)
   process.exit(); // we're all done! Exit the program.
 })
