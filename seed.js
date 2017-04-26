@@ -19,7 +19,7 @@ var new_Movies =  [
     releaseYear: 1997
   },
   {
-     name: "Forrest Gump",
+    name: "Forrest Gump",
     description: "Drama",
     director: "Robert Zemeckis",
     releaseYear: 2001
@@ -27,11 +27,12 @@ var new_Movies =  [
   ];
   
 
- db.Movies.create(new_Movie, function(err, favoritemovies){
-  for (var i = 0; i < new_Movies.length - 1; i++);
+ db.Movies.create(new_Movies, function(err, favoriteemovies){
+  //for (var i = 0; i < new_Movies.length - 1; i++);
   if (err){
    return console.log("Error:", err);
  } else {
    console.log("Created new favoritemovies", Movies._id)
   process.exit(); // we're all done! Exit the program.
-})
+}
+});
